@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import { makeStyles } from '@material-ui/core/styles';
+import axios from 'axios'
 import Avatar from '@material-ui/core/Avatar';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import FavoriteIcon from '@material-ui/icons/Favorite';
@@ -79,8 +80,20 @@ const useStyles = makeStyles({
     }
   });
 
-function StoryCard({stories}){
-    // const breed =  item.breed
+function StoryCard({stories }){
+    // const breed =  item.bree
+    const id = '5f79c6c13462bb27a87b6202'
+    console.log(stories._id)
+    const [favorite, setFavorite] = useState(false)
+    // const setFav = () => {
+    //   if ( likes.includes(id) ){
+    //     setFavorite(true)
+    //   }
+    //   else{
+    //     setFavorite(false)
+    //   }
+    // }
+    // setFav()
     const classes = useStyles();
     const onEnd = () => {
       // You could do something here after speaking has finished
@@ -93,6 +106,7 @@ function StoryCard({stories}){
     const [rate, setRate] = useState(1)
     const voice = voices[9] || null;
     const body = stories.body
+
     // const caption = item.caption
     // function capital(title) { return title.charAt(0).toUpperCase() + title.slice(1)}
     // const title = item.title
@@ -109,6 +123,26 @@ function StoryCard({stories}){
       const handleClickOpen = () => {
         setOpensound(true);
       };
+      const handleFavorite = () => {
+        // if(favorite){
+        //   setFavorite(false)
+        //   axios.put(`http://localhost:5000/stories/like/?id=${id}`, stories._id)
+        //         .catch(error => {
+        //             console.error('There was an error!', error);
+        //         })
+        // }
+        // else{
+        //   setFavorite(true)
+        //   axios.put(`http://localhost:5000/stories/unlike/?id=${id}`, stories._id)
+        //         .catch(error => {
+        //             console.error('There was an error!!', error);
+        //         })
+        // }
+        axios.post(`http://localhost:5000/stories/like`, stories._id)
+                .catch(error => {
+                    console.error('There was an error!!', error);
+                })
+      }
       function valuetext(value) {
         return `${value}°C`;
       }
@@ -172,7 +206,7 @@ function StoryCard({stories}){
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
+        <IconButton aria-label="add to favorites" color={favorite ? "primary" : "transparent"} onClick={handleFavorite}>
           <FavoriteIcon />
         </IconButton>
         <IconButton aria-label="share">

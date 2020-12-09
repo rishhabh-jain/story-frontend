@@ -1,10 +1,9 @@
 
 import React , {useState , useEffect }from 'react';
 import AppBar from '@material-ui/core/AppBar';
+import Link from '@material-ui/core/Link';
 import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
-import InputBase from '@material-ui/core/InputBase';
 import { fade, makeStyles } from '@material-ui/core/styles';
 
 //import MenuIcon from '@material-ui/icons/Menu';
@@ -21,6 +20,17 @@ const useStyles = makeStyles((theme) => ({
       flexGrow: 1,
       color : 'black' ,
       display: 'none',
+      [theme.breakpoints.up('sm')]: {
+        display: 'block',
+      },
+    },
+    title2: {
+      flexGrow: 1,
+      color : 'black' ,
+      display: 'none',
+      '&:hover' : {
+        color : 'black'
+      },
       [theme.breakpoints.up('sm')]: {
         display: 'block',
       },
@@ -109,9 +119,10 @@ function Header({authenticated}){
       <AppBar position="static">
         <Toolbar>
           <div className={classes.left}>
-          <Typography>
-                Stories App
-              </Typography>
+          <Link
+  variant="body1" href="http://localhost:3000" className={classes.title2} >
+            Stories App 
+          </Link>
           </div>
           <div className={classes.right}>
           {/* <div className={classes.search}>
@@ -141,6 +152,14 @@ function Header({authenticated}){
             underline="none">
              Logout
             </Button>)}
+            {authenticated && 
+            <Button
+            className={classes.button}
+            color = "black"
+            href="http://localhost:3000/private"
+            underline="none">
+             My Stories
+            </Button>}
             {/* <Link
             className= {classes.margin}
             variant="h6"

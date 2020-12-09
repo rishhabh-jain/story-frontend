@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
   const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
   });
-function Stories({stories}) {
+function Stories({stories ,id }) {
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
     // const [items , setItems ] = useState([]);
@@ -106,7 +106,7 @@ function Stories({stories}) {
                     
                 </Toolbar>
                 </AppBar>
-                <AddStory/>
+                <AddStory />
             </Dialog>
         </div>
     )

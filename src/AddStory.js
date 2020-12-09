@@ -33,6 +33,7 @@ function AddPostjs() {
       fetchItems()
   }, [])
   const [title, setTitle] = useState("")
+  const [status, setStatus] = useState("")
   const [body, setBody] = useState("")
     const classes = useStyles();
 
@@ -53,7 +54,7 @@ function AddPostjs() {
                 {
                 title: title,
                 body : body,
-                status : 'public' ,
+                status : status ,
                 user : id , 
                 category : 'Romance'
                 };
@@ -64,11 +65,13 @@ function AddPostjs() {
                 console.log(post)
                 setTitle("")
                 setBody("")
+                setStatus('')
     };
     
   return (
     <div className={classes.root}>
             <TextField required id="standard-required" value={title} onChange={(e) => setTitle(e.target.value)} className={classes.padding}fullWidth variant="outlined" label="Title"  />
+            <TextField required id="standard-required" value={status} onChange={(e) => setStatus(e.target.value)} className={classes.padding}fullWidth variant="outlined" label="Status"  />
             <TextField
                 value={body} 
                 onChange={(e) => setBody(e.target.value)}
